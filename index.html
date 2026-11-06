@@ -386,6 +386,41 @@ details summary{list-style:none}
 .drvsum .r{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.drvsum .r:last-child{border:0}.drvsum small{color:var(--muted);font-weight:500}
 .logs{max-height:420px;overflow-y:auto}.lg{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.lg>span{font-size:18px}.lg b{font-size:13.5px}.lg small{color:var(--muted);font-size:11.5px}.lg p{font-size:13px;color:var(--ink);margin-top:2px}
 .oact a.btn{display:flex}
+
+.achips{display:flex;gap:8px;overflow-x:auto;margin:-2px 0 12px;scrollbar-width:none}.achips:empty{display:none}.achips::-webkit-scrollbar{display:none}
+.achip{flex:0 0 auto;padding:9px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface2);font-weight:700;font-size:13px;text-align:start}
+.achip small{display:block;color:var(--muted);font-weight:500;font-size:11px}.achip.on{border-color:var(--brand);background:var(--brand-soft)}
+.doorrow{display:flex;align-items:center;gap:10px;width:100%;text-align:start;margin-top:12px;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--surface2)}
+.doorrow .tx{flex:1}.doorrow b{display:block;font-size:14px}.doorrow small{color:var(--muted);font-size:12px}
+.seg.sm .sg{padding:10px 8px;text-align:center}.seg.sm .sg b{font-size:13px}
+.eta{background:var(--brand-soft);border-radius:14px;padding:12px 14px;margin:-4px 0 14px}.eta b{display:block;font-size:15px}.eta small{color:var(--muted);font-size:12px}
+.eta.live{background:var(--ok-soft)}.eta.live b{color:var(--ok)}
+.lmap{height:190px;border-radius:16px;overflow:hidden;margin:-4px 0 14px;border:1px solid var(--line);z-index:0;position:relative}
+.lf-ic{background:none;border:0}.lf-drv{width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 4px 12px rgba(0,0,0,.3);border:3px solid var(--brand)}
+.lf-shop{width:34px;height:34px;border-radius:50%;background:#2c1b11;display:grid;place-items:center;font-size:17px;box-shadow:0 3px 8px rgba(0,0,0,.3)}
+.proofbox{margin:12px 0 0}.proofbox small{color:var(--muted);font-size:12px;font-weight:600}.proofbox img{display:block;width:100%;max-height:220px;object-fit:cover;border-radius:14px;margin-top:6px}
+.drate{text-align:center;margin-top:12px;font-weight:700}
+
+.onl{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:16px;border-radius:20px;background:var(--surface);border:2px solid var(--line);margin-bottom:12px}
+.onl .tx{flex:1}.onl b{display:block;font-size:17px}.onl small{color:var(--muted);font-size:12.5px}
+.onl.on{border-color:var(--ok);background:var(--ok-soft)}.onl.on b{color:var(--ok)}
+.onl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#bbb;vertical-align:middle}.onl-dot.on{background:var(--ok)}
+.mr.off{opacity:.6}
+.waitdrv{background:#fff4d6;color:#7a5600;border-radius:12px;padding:9px 12px;font-size:13px;font-weight:700;margin:2px 0 10px}
+.proofpick{height:200px;border-radius:16px;border:2px dashed var(--line);display:grid;place-items:center;font-size:48px;overflow:hidden;background:var(--surface2)}
+.proofpick img{width:100%;height:100%;object-fit:cover}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 14px}
+.rgrid div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px}
+.rgrid b{display:block;font-size:20px;font-family:var(--fd)}.rgrid small{color:var(--muted);font-size:11.5px;font-weight:600}
+.rgrid b.good{color:var(--ok)}.rgrid b.badc{color:#d64545}
+.rtable>div{display:grid;grid-template-columns:1.6fr .6fr .6fr .9fr .5fr;gap:6px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;align-items:center}
+.rtable>div:last-child{border:0}.rtable .rh{color:var(--muted);font-size:11.5px;font-weight:700}.rtable small{display:block;color:var(--muted);font-size:11px}
+.bar{position:relative;display:flex;justify-content:space-between;padding:9px 10px;margin-bottom:6px;border-radius:10px;overflow:hidden;font-size:13.5px}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--brand-soft);z-index:0}.bar span,.bar b{position:relative;z-index:1}
+html[dir=rtl] .bar i{inset:0 0 0 auto}
+.zmapw{position:relative;height:300px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}#zmap{position:absolute;inset:0}
+.mpin.sm{z-index:500}
+.zbtn{flex:0 0 40px!important;color:inherit!important;font-size:16px}.zbtn.on{background:var(--ok-soft)!important;border-color:var(--ok)!important}
 </style>
 </head>
 <body>
@@ -440,14 +475,19 @@ details summary{list-style:none}
         <div class="fld"><label data-t="phone"></label><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="03 123 456"><div class="er" data-t="errPhone"></div></div>
       </div>
       <div class="card" id="addrCard"><h3>📍 <span data-t="address"></span></h3>
+        <div class="achips" id="savedAddr"></div>
         <div class="fld"><label data-t="area"></label><select id="cArea"></select><div class="er" data-t="errArea"></div></div>
         <div class="fld"><label data-t="street"></label><input id="cAddr" autocomplete="street-address"><div class="er" data-t="errAddr"></div></div>
         <div class="fld"><label data-t="directions"></label><input id="cDir"></div>
         <button type="button" class="pinbtn" id="pinBtn"><span class="pi">📍</span><span class="tx"><b id="pinTxt"></b><small data-t="pinSub"></small></span></button>
+        <button type="button" class="doorrow" id="doorTg"><span class="tx"><b>🚪 <span data-t="doorL"></span></b><small data-t="doorSub"></small></span><span class="tg"></span></button>
+        <div id="saveRow"><div class="fld" style="margin:12px 0 0"><label data-t="saveL"></label></div><div class="seg sm" id="saveSeg"><button type="button" class="sg on" data-v=""><b data-t="noSave"></b></button><button type="button" class="sg" data-v="home"><b>🏠 <span data-t="aHome"></span></b></button><button type="button" class="sg" data-v="work"><b>💼 <span data-t="aWork"></span></b></button><button type="button" class="sg" data-v="other"><b>📍 <span data-t="aOther"></span></b></button></div></div>
+      </div>
+      <div class="card" id="tipCard"><h3>💛 <span data-t="tipT"></span></h3><div class="seg sm" id="tipSeg"><button type="button" class="sg on" data-v="0"><b data-t="noTip"></b></button><button type="button" class="sg" data-v="0.5"><b>$0.50</b></button><button type="button" class="sg" data-v="1"><b>$1</b></button><button type="button" class="sg" data-v="2"><b>$2</b></button></div>
       </div>
       <div class="card"><h3>🕒 <span data-t="when"></span></h3>
         <div class="seg" id="whenSeg"><button type="button" class="sg on" data-v="asap"><b data-t="asap"></b><small id="etaTxt"></small></button><button type="button" class="sg" data-v="later"><b data-t="schedule"></b><small data-t="pickTime"></small></button></div>
-        <div class="fld" id="timeF" style="display:none;margin-top:12px"><input id="cTime" type="time"></div>
+        <div class="fld" id="timeF" style="display:none;margin-top:12px"><div class="seg sm" id="daySeg" style="margin-bottom:10px"><button type="button" class="sg on" data-v="today"><b data-t="today"></b></button><button type="button" class="sg" data-v="tomorrow"><b data-t="tmr"></b></button></div><input id="cTime" type="time"></div>
       </div>
       <div class="card"><h3>💳 <span data-t="payment"></span></h3>
         <div class="seg" id="paySeg"><button type="button" class="sg on" data-v="cash"><b data-t="cash"></b><small data-t="cashSub"></small></button><button type="button" class="sg" data-v="card"><b data-t="card"></b><small data-t="cardSub"></small></button></div>
@@ -508,6 +548,7 @@ details summary{list-style:none}
         <div class="fld"><label data-t="street"></label><input id="pAddr"></div>
         <div class="fld"><label data-t="directions"></label><input id="pDir"></div>
       </div>
+      <div class="card"><h3>📍 <span data-t="myAddr"></span></h3><div class="menu-g" id="addrList" style="margin:0"></div></div>
       <button class="btn" type="submit" data-t="save"></button>
     </form>
   </section>
