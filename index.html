@@ -10,6 +10,7 @@
 <meta name="theme-color" content="#16110d">
 <meta name="description" content="Order fresh baked goods for delivery from Croissant Al Dar.">
 
+<link rel="stylesheet" href="app.css">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="icon" href="icons/icon-192.png">
@@ -359,6 +360,32 @@ html.dark .fchips button.on{background:var(--brand);border-color:var(--brand)}
 .alog-hero b{display:block;font-family:var(--fd);font-size:22px}.alog-hero small{color:var(--muted)}
 .grab2{width:42px;height:5px;border-radius:9px;background:var(--line);margin:-8px auto 14px}
 details summary{list-style:none}
+
+.r.lbp{color:var(--muted);font-size:13px;padding-top:0}
+.pinbtn{display:flex;gap:12px;align-items:center;width:100%;text-align:start;margin-top:12px;padding:12px;border-radius:14px;border:1.5px dashed var(--line);background:var(--surface2)}
+.pinbtn .pi{width:40px;height:40px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+.pinbtn b{display:block;font-size:14px}.pinbtn small{color:var(--muted);font-size:12px}
+.pinbtn.ok{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
+#mapSheet{position:fixed;inset:0;z-index:120;background:var(--bg);display:none}
+#mapSheet.on{display:block}
+#mapBox{position:absolute;inset:0}
+.mpin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);z-index:500;pointer-events:none;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.mtop{position:absolute;top:calc(12px + var(--st));left:12px;right:12px;display:flex;gap:10px;align-items:center;z-index:500}
+.mtop .ib{box-shadow:var(--shadow)}
+.mhint{flex:1;background:var(--surface);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:600;box-shadow:var(--shadow)}
+.mbot{position:absolute;left:12px;right:12px;bottom:calc(14px + var(--sb));display:flex;gap:10px;z-index:500}
+.leaflet-container{font-family:var(--f)}
+.warnbar.bad{background:#fde8e8;color:#a32020}
+.ocard.flag{border:2px solid #d64545}
+.pcheck{background:#fde8e8;color:#8a1c1c;border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+.pcheck ul{margin:6px 0 4px;padding-inline-start:18px}.pcheck small{display:block;color:#a34444}
+.pok{color:var(--ok);font-size:12px;font-weight:700;margin-bottom:8px}
+.mode-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;padding:4px 8px;border-radius:8px;background:var(--surface2);color:var(--muted);margin-bottom:8px}
+.mode-tag.pk{background:#e8f0fd;color:#2b6cb0}
+.olinks{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}.olinks .olink{margin:12px 0 0}
+.drvsum .r{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}.drvsum .r:last-child{border:0}.drvsum small{color:var(--muted);font-weight:500}
+.logs{max-height:420px;overflow-y:auto}.lg{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.lg>span{font-size:18px}.lg b{font-size:13.5px}.lg small{color:var(--muted);font-size:11.5px}.lg p{font-size:13px;color:var(--ink);margin-top:2px}
+.oact a.btn{display:flex}
 </style>
 </head>
 <body>
@@ -406,14 +433,17 @@ details summary{list-style:none}
   <section class="view" id="v-checkout">
     <div class="ph"><button class="ib press" data-go="cart"><svg class="flip" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg></button><h1 data-t="checkout"></h1></div>
     <form class="sec" style="padding-top:4px" id="coForm" novalidate>
+      <div class="card" id="modeCard"><div class="seg" id="modeSeg"><button type="button" class="sg on" data-v="delivery"><b>🛵 <span data-t="modeDel"></span></b><small data-t="modeDelSub"></small></button><button type="button" class="sg" data-v="pickup"><b>🛍️ <span data-t="modePick"></span></b><small data-t="modePickSub"></small></button></div></div>
+      <div class="card" id="pickInfo" style="display:none"><h3>🛍️ <span data-t="pickupAt"></span></h3><p class="hint" id="pickAddr"></p></div>
       <div class="card"><h3>👤 <span data-t="yourDetails"></span></h3>
         <div class="fld"><label data-t="fullName"></label><input id="cName" autocomplete="name"><div class="er" data-t="errName"></div></div>
         <div class="fld"><label data-t="phone"></label><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="03 123 456"><div class="er" data-t="errPhone"></div></div>
       </div>
-      <div class="card"><h3>📍 <span data-t="address"></span></h3>
+      <div class="card" id="addrCard"><h3>📍 <span data-t="address"></span></h3>
         <div class="fld"><label data-t="area"></label><select id="cArea"></select><div class="er" data-t="errArea"></div></div>
         <div class="fld"><label data-t="street"></label><input id="cAddr" autocomplete="street-address"><div class="er" data-t="errAddr"></div></div>
         <div class="fld"><label data-t="directions"></label><input id="cDir"></div>
+        <button type="button" class="pinbtn" id="pinBtn"><span class="pi">📍</span><span class="tx"><b id="pinTxt"></b><small data-t="pinSub"></small></span></button>
       </div>
       <div class="card"><h3>🕒 <span data-t="when"></span></h3>
         <div class="seg" id="whenSeg"><button type="button" class="sg on" data-v="asap"><b data-t="asap"></b><small id="etaTxt"></small></button><button type="button" class="sg" data-v="later"><b data-t="schedule"></b><small data-t="pickTime"></small></button></div>
@@ -529,6 +559,9 @@ details summary{list-style:none}
 </nav>
 <div class="ov" id="aov" style="z-index:60"></div>
 <div class="sheet" id="asheet" style="z-index:61;padding-bottom:calc(20px + var(--sb))"></div>
+<div id="mapSheet"><div id="mapBox"></div><div class="mpin"><svg width="44" height="56" viewBox="0 0 24 30"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.4 12 30 12 30s12-9.6 12-18.3C24 5.2 18.6 0 12 0Z" fill="var(--brand)"/><circle cx="12" cy="11.5" r="4.5" fill="#fff"/></svg></div>
+  <div class="mtop"><button class="ib" id="mapClose">✕</button><div class="mhint" data-t="dragPin"></div></div>
+  <div class="mbot"><button class="btn gh" id="mapMe" style="flex:0 0 auto;width:auto;padding:16px 18px">🎯 <span data-t="useMyLoc"></span></button><button class="btn" id="mapOk" data-t="confirmPin"></button></div></div>
 <div class="toast" id="toast"></div>
 
 <script src="config.js"></script>
