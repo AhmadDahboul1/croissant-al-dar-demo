@@ -1,3 +1,3 @@
-# Croissant Al Dar
+# Wajbatek
 
-Ordering and delivery app for Croissant Al Dar.
+Restaurant ordering and delivery app — demo.
